@@ -5,9 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Matthew on 06/11/2014.
@@ -18,6 +16,12 @@ public class GUIhandler {
     public static JLabel title;
     public static JComboBox numberOfResultsSelector;
     public static JTable displayEvents;
+
+    public static JButton searchButton;
+    public static JButton optionsButton;
+    public static JButton nextButton;
+    public static JButton previousButton;
+
     public GUIhandler() {
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -33,7 +37,8 @@ public class GUIhandler {
 
     }
 
-    public static void createAndShowGUI(){
+
+    public void createAndShowGUI() {
 
         JFrame frame = new JFrame("Book Tickets");
 
@@ -47,7 +52,7 @@ public class GUIhandler {
 
     }
 
-    public  static void addComponents(Container pane){
+    public static void addComponents(Container pane) {
 
 
         pane.setLayout(new GridBagLayout());
@@ -61,10 +66,9 @@ public class GUIhandler {
         c.gridx = 0;
         c.gridy = 0;
         c.insets = new Insets(0, 5, 0, 0);
-        
         pane.add(searchBox, c);
 
-        JButton searchButton = new JButton("Search");
+        searchButton = new JButton("Search");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 1;
         c.gridx = 2;
@@ -72,7 +76,8 @@ public class GUIhandler {
         c.insets = new Insets(5, 5, 5, 5);
         pane.add(searchButton, c);
 
-        JButton optionsButton = new JButton("Options");
+
+        optionsButton = new JButton("Options");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 1;
         c.gridx = 3;
@@ -102,11 +107,10 @@ public class GUIhandler {
         pane.add(numberOfResultsSelector, c);
 
 
-
         String[] columnNames = {"Title", "Description"};
         String[][] data = {
 
-                {"Apes of men", "A fast paced movie about apes becoming men. Little girl lucy befriends apeman George in the coming of the rainbow unicorn lord"},
+                {"Ape Hunter", "A fast paced ape hunting event. Are you the alpha male? Are you gonna go ape? Then this is the event for you."},
                 {"Ultimate bowling", "Many people bowl. Such bowling. Alas. For people who love to bowl. I eat from bowls. We eat from bowls. 100 chars please"},
                 {"Trolly hunting", "People around portsmouth, seek out wild trollies. In the great catacombs known as fratton. Please avoid knife wilding adolescent children."}
 
@@ -123,7 +127,7 @@ public class GUIhandler {
         c.gridy = 3;
         pane.add(scrollPane, c);
 
-        JButton previousButton = new JButton("Previous");
+        previousButton = new JButton("Previous");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 1;
         c.gridx = 2;
@@ -132,7 +136,7 @@ public class GUIhandler {
         c.insets = new Insets(5, 5, 5, 5);
         pane.add(previousButton, c);
 
-        JButton nextButton = new JButton("Next");
+        nextButton = new JButton("Next");
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 1;
         c.gridx = 3;
@@ -141,8 +145,23 @@ public class GUIhandler {
         c.insets = new Insets(5, 5, 5, 5);
         pane.add(nextButton, c);
 
+ 
+
+        searchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searchBox.setText("search");
+            }
+        });
+
+        optionsButton.addActionListener( new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                searchBox.setText("options");
+            }
+        });
 
     }
 
-
 }
+
