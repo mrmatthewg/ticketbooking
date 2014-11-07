@@ -2,10 +2,7 @@ package uk.matthewg.ticketclient.handlers;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 /**
  * Created by Matthew on 06/11/2014.
@@ -21,6 +18,9 @@ public class GUIhandler {
     public static JButton optionsButton;
     public static JButton nextButton;
     public static JButton previousButton;
+
+    static String beforeSearch = "Type in your search here.";
+    public static String savedString;
 
     public GUIhandler() {
 
@@ -145,11 +145,18 @@ public class GUIhandler {
         c.insets = new Insets(5, 5, 5, 5);
         pane.add(nextButton, c);
 
- 
+
 
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                searchBox.setText("search");
+                savedString = searchBox.getText();
+                System.out.println(savedString);
+                String searchCheck = searchBox.getText();
+
+                if (searchCheck == "")
+                {
+                    /*print all events to JTable*/
+                }
             }
         });
 
@@ -158,8 +165,28 @@ public class GUIhandler {
             public void actionPerformed(ActionEvent e)
             {
                 searchBox.setText("options");
+                /* open up another java dialog for selecting server*/
             }
         });
+
+
+
+        searchBox.addMouseListener(new MouseAdapter() {
+
+
+                                       @Override
+                                       public void mousePressed(MouseEvent event) {
+
+                                           String searchCheck = searchBox.getText();
+
+                                           if (searchCheck.equals(beforeSearch))
+                                           {
+                                               searchBox.setText("");
+                                           }
+                                }
+
+                      }
+        );
 
     }
 
